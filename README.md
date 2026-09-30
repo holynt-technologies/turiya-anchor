@@ -1,5 +1,7 @@
 # Turiya anchor
 
+**Specification version 1, published 2026-09-30.**
+
 What a receipt is, how to check one without us, and the public keys that say which receipts are
 ours.
 
