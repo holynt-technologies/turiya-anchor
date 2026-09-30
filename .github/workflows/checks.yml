@@ -1,0 +1,24 @@
+name: checks
+
+# Runs on every push and every pull request, so the result does not depend on anything
+# running on a particular machine.
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  repository:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check the repository contents
+        env:
+          FORBIDDEN_PATTERNS: ${{ secrets.FORBIDDEN_PATTERNS }}
+        run: python3 scripts/check_repository.py
