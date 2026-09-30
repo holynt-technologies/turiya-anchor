@@ -1,0 +1,8 @@
+{
+  "canonical_sha256": "52d6649441fcbfc09afb16da34ff13e64e412292aae756d31bae69f29169d023",
+  "signed_message": "52d6649441fcbfc09afb16da34ff13e64e412292aae756d31bae69f29169d023",
+  "signature_hex": "0d439871e2c001eae9e5f6354a34c0441d2dd5b20a79c3c0af1f160cd011eff9ead19b994afb048d6bcd36c91d298e1b99bc1b42a133eca485e25ce938915d00",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEA/jJuYipI/y6/GDbKYKO/opSFVu3yu0MjlTQ9qtZrKjg=\n-----END PUBLIC KEY-----\n",
+  "source": "receipts/click-0f71fe7.json",
+  "canonical_bytes": 1484
+}

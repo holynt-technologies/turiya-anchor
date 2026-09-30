@@ -1,0 +1,6 @@
+{
+  "must_fail": true,
+  "reason": "one character changed inside the hashed region",
+  "altered": "the first string value inside outcome",
+  "source": "flat-sweverify"
+}

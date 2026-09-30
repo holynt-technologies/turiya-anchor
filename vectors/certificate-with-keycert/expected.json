@@ -1,0 +1,8 @@
+{
+  "canonical_sha256": "39979a0da2764b950fe3016454655dff72d10fd0c3572ac89e4ca3cc485c655d",
+  "signed_message": "39979a0da2764b950fe3016454655dff72d10fd0c3572ac89e4ca3cc485c655d",
+  "signature_hex": "c793c2a2760f6c4825467620c494348f5ae1b7717c1e26beca9fbd0af304647d8a726bff99d4cfcbb826b73c67b6fccbdaea34c04f44dc11929c3cc8e4cb2601",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAJCck0ZY9iv4TdtzJAxiVCJ1J7AiDwYDZ0HwJSzd/few=\n-----END PUBLIC KEY-----\n",
+  "source": "receipts/archetypes/agent-falsification-hunt-5d303baa00a6b243-39979a0da276.json",
+  "canonical_bytes": 2323
+}

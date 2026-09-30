@@ -1,0 +1,8 @@
+{
+  "canonical_sha256": "64104dd6423fb0d3cbd601d0f92df933d6beeb5b68c1ed3059048c1f5992a960",
+  "signed_message": "64104dd6423fb0d3cbd601d0f92df933d6beeb5b68c1ed3059048c1f5992a960",
+  "signature_hex": "8c2cb3f9a5ce8e7f3bf5c127eadd881d50b0064c23b5f3ad56affd39b9455704d0c4f00b5532228675b4dd57d6f8961e10c6984d96730b845a00a4d164ef9a08",
+  "public_key_pem": "-----BEGIN PUBLIC KEY-----\nMCowBQYDK2VwAyEAJCck0ZY9iv4TdtzJAxiVCJ1J7AiDwYDZ0HwJSzd/few=\n-----END PUBLIC KEY-----\n",
+  "source": "receipts/archetypes/64104dd6423fb0d3cbd601d0f92df933d6beeb5b68c1ed3059048c1f5992a960.json",
+  "canonical_bytes": 1033
+}
