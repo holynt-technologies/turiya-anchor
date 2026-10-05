@@ -82,8 +82,9 @@ so that is what gets pinned.
 
 ## What this repository does not contain
 
-The compiler, the archetypes, the calibrated axes, the thresholds, and the decision rules. Those
-decide *what* is tested and how hard. They are not needed to check a receipt and they are not here.
+The compiler, the archetype implementations, the calibration, the thresholds, and the decision
+rules. Those decide *what* is tested and how hard. They are not needed to check a receipt and they
+are not here.
 
 ## The licence, and the one thing it is for
 
