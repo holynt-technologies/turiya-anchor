@@ -88,6 +88,11 @@ are not here.
 
 ## The licence, and the one thing it is for
 
+**This specification is a deliberate publication, and the detail is the point.** It is written to
+stand as prior art, so that the format stays in the public domain rather than becoming anyone's
+patent. That cuts both ways, and we accept it: having published it, we hold no patent over it
+either.
+
 Apache License 2.0. Two things about that choice.
 
 The copyright grant is ordinary. The interesting half is the patent grant, which includes

@@ -328,7 +328,10 @@ proved against a signed artefact rather than against its author's reading of the
 
 - **How a claim becomes a test.** The compiler. Withheld.
 - **What is tested and how hard.** The axes, the thresholds, the resampling protocol, the decision
-  rules. Withheld.
+  rules. Withheld. A receipt names the archetype it was issued under, and where it has one, the
+  failure class it tested, because a verdict a reader cannot attribute is not checkable. What no
+  receipt carries is how an axis is calibrated, how passes are composed, or what a threshold has to
+  be for a probe to run.
 - **The meaning or correctness of a verdict.** This specification defines what a receipt *is*, not
   whether it is *right*. See §12.
 - **The timestamping authority protocol.** RFC 3161, elsewhere.
