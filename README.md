@@ -41,6 +41,12 @@ keys we have claimed, because a receipt signed in 2026 has to keep verifying in 
 a new master must not orphan the chain on everything signed before it. The current root is the one
 on the newest receipt.
 
+**Roots get rotated, and every one stays here.** The last rotation was 8 October 2026, when the
+previous root was retired because it had been held somewhere our ceremony forbids. The notice —
+what happened, and what it means for a receipt you already hold — is published at
+<https://turiyahq.com/key-rotation>. Nothing was re-signed, and a receipt from before that date
+verifies under the root that signed it, which is still in this directory.
+
 Every receipt carries its root inside its `key_cert`, so a receipt's chain is internally consistent
 on its own. What that cannot tell you is whose key it is. These files are the statement that they
 are ours, in a repository whose history cannot be quietly rewritten.
