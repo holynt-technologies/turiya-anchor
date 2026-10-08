@@ -30,22 +30,28 @@ assume two hosts where there is one.
 | `RECEIPT_SPEC.md` | The format. Normative for how to check a receipt. |
 | `vectors/` | Test vectors. Four must pass. Two must fail. |
 | `receipts/` | A copy of every published receipt, with `MANIFEST.json`. |
-| `keys/` | The root public key, and the retirement list. |
+| `keys/roots/` | Every root public key we have claimed, one file per key, named by its key id. |
+| `keys/retirements.json` | The retirement list. Empty. |
 
 ## The keys, and how to check one is ours
 
-`keys/root-public-key.pem` is the master public key. Every receipt carries it inside its
-`key_cert`, so a receipt's chain is internally consistent on its own. What that cannot tell you is
-whose key it is. This file is the statement that it is ours, in a repository whose history cannot
-be quietly rewritten.
+`keys/roots/` holds one file per root public key we have claimed, named by the key id the receipts
+already print. **It is a set, and not a single file on purpose.** A trust anchor is a list of the
+keys we have claimed, because a receipt signed in 2026 has to keep verifying in 2031 — rotating to
+a new master must not orphan the chain on everything signed before it. The current root is the one
+on the newest receipt.
 
-To check it against the record, pull the key out of any published receipt and compare:
+Every receipt carries its root inside its `key_cert`, so a receipt's chain is internally consistent
+on its own. What that cannot tell you is whose key it is. These files are the statement that they
+are ours, in a repository whose history cannot be quietly rewritten.
+
+To check a receipt against the record, pull the root out of it and look for that key id here:
 
 ```
-python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['key_cert']['root_public_key'].strip())" <any receipt>
+python3 -c "import json,sys,hashlib;print(hashlib.sha256(json.load(open(sys.argv[1]))['key_cert']['root_public_key'].encode()).hexdigest()[:16])" <any receipt>
 ```
 
-That must equal `keys/root-public-key.pem`, character for character. It does for every receipt here
+It prints a key id, and that id must name a file in `keys/roots/`. It does for every receipt here
 that carries one.
 
 **`keys/retirements.json` is the retirement list, and it is empty.** That is the honest statement
