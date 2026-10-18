@@ -1,10 +1,14 @@
 #!/usr/bin/env python3
 """Check that this repository contains only what it should.
 
-Patterns are read from the `FORBIDDEN_PATTERNS` environment variable, one regular expression
-per line, so the set can be changed without a commit here. Without it the script scans for
-nothing and exits 1 rather than reporting a pass, because a check that cannot see what it is
-checking must not report success.
+Patterns are read from two places, one regular expression per line:
+
+* the committed `scripts/forbidden_patterns.txt`, which is reviewable and testable;
+* the `FORBIDDEN_PATTERNS` environment variable, for patterns that must not be published.
+
+The sets are unioned. With neither source the script scans for nothing and exits 1
+rather than reporting a pass, because a check that cannot see what it is checking must
+not report success.
 
 It runs on every push and every pull request, from `.github/workflows/checks.yml`, so the
 result does not depend on anything running on a particular machine.
@@ -21,7 +25,11 @@ import sys
 #: Not scanned: git's internals and the workflow directory. The workflow names this file by
 #: its full path, so scanning that directory would report the reference to this file.
 SKIP_DIRS = {".git", ".github"}
-SKIP_FILES = {"scripts/check_repository.py"}
+SKIP_FILES = {"scripts/check_repository.py", "scripts/forbidden_patterns.txt"}
+
+#: The committed, auditable pattern list. The environment variable remains for the
+#: patterns that must stay private.
+PATTERN_FILE = pathlib.Path(__file__).resolve().parent / "forbidden_patterns.txt"
 
 TEXT_SUFFIXES = {".md", ".txt", ".json", ".py", ".yml", ".yaml", ".cff", ".pem", ""}
 
@@ -34,22 +42,43 @@ ALLOW = [
 NAME = "check-repository"
 
 
+def _patterns_from(text: str) -> list[str]:
+    out = []
+    for line in text.splitlines():
+        line = line.strip()
+        if line and not line.startswith("#"):
+            out.append(line)
+    return out
+
+
 def main() -> int:
     root = pathlib.Path(".").resolve()
-    raw = os.environ.get("FORBIDDEN_PATTERNS", "").strip()
 
-    if not raw:
-        print(f"{NAME}: FORBIDDEN_PATTERNS is empty, so nothing was searched for.",
+    sources = _patterns_from(os.environ.get("FORBIDDEN_PATTERNS", ""))
+    try:
+        sources += _patterns_from(PATTERN_FILE.read_text(encoding="utf-8"))
+    except FileNotFoundError:
+        pass
+    except OSError as e:
+        print(f"{NAME}: cannot read {PATTERN_FILE}: {e}", file=sys.stderr)
+        return 1
+
+    seen = set()
+    raw_patterns = []
+    for p in sources:
+        if p not in seen:
+            seen.add(p)
+            raw_patterns.append(p)
+
+    if not raw_patterns:
+        print(f"{NAME}: no patterns from FORBIDDEN_PATTERNS or {PATTERN_FILE.name},",
               file=sys.stderr)
-        print("                 Refusing to report a pass on a check that checked nothing.",
+        print("                 so nothing was searched for. Refusing to report a pass.",
               file=sys.stderr)
         return 1
 
     patterns = []
-    for line in raw.splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
+    for line in raw_patterns:
         try:
             patterns.append((line, re.compile(line)))
         except re.error as e:

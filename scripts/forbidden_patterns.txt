@@ -1,0 +1,26 @@
+# Committed pattern list for scripts/check_repository.py.
+# One regular expression per line. These guard this public repository against
+# publishing key material, personal data, internal paths, and withheld method.
+# The private FORBIDDEN_PATTERNS secret is unioned with this list; neither source
+# alone is a pass, and both empty is a failure.
+
+# Credentials and key material
+BEGIN (RSA |OPENSSH |EC |)PRIVATE KEY
+sk-[A-Za-z0-9]{20,}
+ghp_[A-Za-z0-9]{20,}
+
+# Personal data and internal paths
+@(gmail|yahoo|outlook)\.[a-z]+
+/home/ruffy
+# The former working name with a character class, so this pattern file does not
+# itself contain the contiguous name the public-content guard forbids.
+stea[l]th[-_]
+
+# Withheld verification method (see RECEIPT_SPEC.md section 10)
+resampl(e|ing)[_\s-]*(count|k)\s*[:=]\s*[0-9]+
+temperature\s*[:=]\s*0\.[0-9]+
+wilson_interval\(
+gate[_\s-]?order\s*[:=]
+decision[_\s-]?rule\s*[:=]
+claim[_\s-]?ontology\s*[:=]
+TURIYA_GENERATOR
